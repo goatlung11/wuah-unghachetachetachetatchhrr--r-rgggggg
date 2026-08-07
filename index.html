@@ -1,9 +1,389 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIBE CODE · sick</title>
+  <!-- font & icons (clean) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0c0e1a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 1.5rem;
+      /* subtle animated gradient overlay */
+      background-image: radial-gradient(circle at 20% 30%, #1f1b3b 0%, #0b0d1a 80%);
+    }
+
+    /* main card — glassmorphism + neon glow */
+    .vibe-card {
+      max-width: 1000px;
+      width: 100%;
+      background: rgba(18, 22, 40, 0.55);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-radius: 4rem 2rem 4rem 2rem;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(120, 80, 255, 0.2) inset, 0 0 30px #6d44ff40;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vibe-card::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -20%;
+      width: 180%;
+      height: 180%;
+      background: conic-gradient(from 0deg at 50% 50%, #7f5aff10, #ff6bcb08, #7f5aff10, #00d4ff08, #7f5aff10);
+      animation: spinGlow 24s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes spinGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header / vibe */
+    .tag {
+      display: inline-block;
+      background: rgba(255, 100, 200, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 0.35rem 1.4rem;
+      border-radius: 60px;
+      border: 1px solid rgba(255, 130, 200, 0.25);
+      color: #f0b0ff;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 15px #b77aff30;
+    }
+
+    .tag i {
+      margin-right: 8px;
+      color: #ff8ad4;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 14vw, 6rem);
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, #f0eaff 0%, #c6b0ff 50%, #ff99e6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 40px #7f5aff50;
+      margin-bottom: 0.4rem;
+    }
+
+    .glow-text {
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      color: #b9b3e6;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 2.8rem;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 0.8rem 1.8rem;
+      border-radius: 80px;
+      backdrop-filter: blur(4px);
+      border: 1px solid #9d83ff20;
+      width: fit-content;
+    }
+
+    .glow-text i {
+      color: #ff7bcb;
+      font-size: 1.2rem;
+    }
+
+    .glow-text span {
+      background: linear-gradient(45deg, #bd9aff, #ff9bdb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 600;
+    }
+
+    /* grid - sick features */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.8rem;
+      margin: 3rem 0 3rem 0;
+    }
+
+    .feature-item {
+      background: rgba(22, 26, 50, 0.5);
+      backdrop-filter: blur(4px);
+      padding: 1.8rem 1.2rem;
+      border-radius: 2rem 1rem 2rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      box-shadow: 0 12px 20px -10px #00000060;
+      transition: all 0.25s ease;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .feature-item:hover {
+      transform: translateY(-8px);
+      border-color: #b48aff60;
+      box-shadow: 0 18px 35px -8px #3a2b7a, 0 0 0 1px #a37aff30 inset;
+      background: rgba(30, 28, 60, 0.7);
+    }
+
+    .feature-item i {
+      font-size: 2.8rem;
+      background: linear-gradient(145deg, #c9b4ff, #ff8ed0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+      filter: drop-shadow(0 0 12px #a56eff60);
+    }
+
+    .feature-item h3 {
+      color: #ded6ff;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: -0.2px;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-item p {
+      color: #a59ec9;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      opacity: 0.9;
+    }
+
+    /* cta + code block vibe */
+    .action-area {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .code-snippet {
+      background: #0f111fcc;
+      backdrop-filter: blur(8px);
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      border: 1px solid #5d4b9a50;
+      font-family: 'Fira Code', 'Menlo', monospace;
+      font-size: 0.9rem;
+      color: #d8d0ff;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      box-shadow: 0 0 20px #3f2d7a30;
+    }
+
+    .code-snippet i {
+      color: #ff94d4;
+      font-size: 1.2rem;
+    }
+
+    .code-snippet .cmd {
+      background: #1b1d33;
+      padding: 0.3rem 0.9rem;
+      border-radius: 40px;
+      color: #b3a0ff;
+      border: 1px solid #6b54b0;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-pulse {
+      background: linear-gradient(145deg, #7b5aff, #b45aff);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.9rem 2.8rem;
+      border-radius: 80px;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 0 30px #7b5aff80, 0 0 0 2px #ffffff20 inset;
+      cursor: default;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+      border: 1px solid #c6adff50;
+    }
+
+    .btn-pulse i {
+      font-size: 1.2rem;
+    }
+
+    .btn-pulse:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 50px #9a7aff, 0 0 0 3px #ffffff30 inset;
+      background: linear-gradient(145deg, #8b6eff, #c56aff);
+    }
+
+    /* footer / social */
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 2.8rem;
+      justify-content: flex-end;
+      align-items: center;
+      color: #746baa;
+    }
+
+    .social-links a {
+      color: #9b8fd4;
+      font-size: 1.5rem;
+      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.3rem 0.6rem;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+      border: 1px solid transparent;
+    }
+
+    .social-links a:hover {
+      color: #f0d0ff;
+      transform: translateY(-3px);
+      border-color: #b48aff50;
+      text-shadow: 0 0 25px #b27aff;
+    }
+
+    .social-links span {
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      opacity: 0.5;
+    }
+
+    /* responsive */
+    @media (max-width: 640px) {
+      .vibe-card {
+        padding: 1.8rem 1.2rem;
+        border-radius: 2.5rem 1.2rem 2.5rem 1.2rem;
+      }
+      .glow-text {
+        width: 100%;
+        justify-content: center;
+      }
+      .action-area {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .code-snippet {
+        justify-content: center;
+      }
+      .btn-pulse {
+        justify-content: center;
+      }
+      .social-links {
+        justify-content: center;
+        margin-top: 2rem;
+      }
+      .feature-grid {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
 <body>
+  <div class="vibe-card">
+    <div class="content">
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+      <!-- tag -->
+      <div class="tag">
+        <i class="fas fa-bolt"></i> vibe coding · beta 2.0
+      </div>
 
+      <!-- main heading -->
+      <h1>VIBE CODE</h1>
+      <div class="glow-text">
+        <i class="fas fa-circle" style="font-size: 0.6rem; color: #ff7bcb;"></i>
+        build <span>sick</span> websites · fast · flow state
+        <i class="fas fa-meteor" style="margin-left: 6px;"></i>
+      </div>
+
+      <!-- feature grid — SICK features -->
+      <div class="feature-grid">
+        <div class="feature-item">
+          <i class="fas fa-bolt"></i>
+          <h3>Hyperloop</h3>
+          <p>instant hot-reload, <br>zero latency vibes</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-palette"></i>
+          <h3>Neon Flux</h3>
+          <p>dynamic gradients &amp; <br>glassmorphism</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-cube"></i>
+          <h3>3D Mesh</h3>
+          <p>webgl ready, <br>immersive scenes</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-headphones"></i>
+          <h3>Audio Reactive</h3>
+          <p>vibe with the <br>beat‑driven UI</p>
+        </div>
+      </div>
+
+      <!-- action row: code + CTA -->
+      <div class="action-area">
+        <div class="code-snippet">
+          <i class="fas fa-code"></i>
+          <span class="cmd">$ vibe init</span>
+          <span style="color: #958bcb;">—</span>
+          <span style="color: #b8acff;">./sick-website</span>
+        </div>
+
+        <div class="btn-pulse">
+          <i class="fas fa-play"></i> launch vibe
+        </div>
+      </div>
+
+      <!-- social / footer -->
+      <div class="social-links">
+        <span><i class="fas fa-wave-square"></i> #vibecode</span>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-discord"></i></a>
+        <a href="#"><i class="fas fa-music"></i></a>
+      </div>
+
+    </div> <!-- /content -->
+  </div> <!-- /vibe-card -->
 </body>
 </html>
