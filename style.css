@@ -34,8 +34,8 @@ body {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 1.125rem;
   line-height: 1.6;
-  color: #FFE5FB;        /* <-- TEXT COLOR */
-  background: #140900;   /* <-- BACKGROUND COLOR */
+  color: #;        /* <-- TEXT COLOR */
+  background: #;   /* <-- BACKGROUND COLOR */
 }
 
 /* --------------------------------------------------------------------------
@@ -47,7 +47,7 @@ body {
    Add "text-decoration: none;" if you want them plain (default look).
    -------------------------------------------------------------------------- */
 a {
-  color: #FF00D7;        /* <-- LINK COLOR */
+  color: #;        /* <-- LINK COLOR */
 }
 
 /* --------------------------------------------------------------------------
